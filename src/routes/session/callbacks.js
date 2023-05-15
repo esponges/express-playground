@@ -1,6 +1,3 @@
-const express = require('express');
-const router = express.Router();
-
 const setSession = (req, res, next) => {
   req.session.user = { username: 'John Doe', password: 'Foobar' };
   res.send('Session Set');
