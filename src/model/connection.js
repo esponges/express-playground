@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-
+require('dotenv').config();
 
 const userSchema = mongoose.Schema({
     userName: { type: String, required: [true, 'userName is mandatory'], unique: true },
@@ -27,7 +27,7 @@ let throwError = (message, statusCode) => {
 let connection = {}
 
 connection.createConnection = () => {
-    return mongoose.connect('mongodb+srv://esponges:jxi6KmFLe54zeKsi@cluster0.7dqbabh.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
+    return mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
 }
 
 
