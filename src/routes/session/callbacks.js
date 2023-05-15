@@ -12,8 +12,16 @@ const updateSession = (req, res, next) => {
   res.send(`User password updated to ${req.session.user.password}`);
 };
 
+const endSession = (req, res, next) => {
+  req.session.destroy(() => {
+    res.clearCookie('connect.sid');
+    res.send('Session Destroyed');
+  });
+};
+
 module.exports = {
   setSession,
   getSession,
   updateSession,
+  endSession,
 };

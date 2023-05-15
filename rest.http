@@ -36,3 +36,12 @@ DELETE http://localhost:3000/logout
 ###
 
 POST http://localhost:3000/session
+###
+
+GET http://localhost:3000/session
+###
+
+PUT http://localhost:3000/session
+###
+
+DELETE http://localhost:3000/session
