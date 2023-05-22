@@ -1,9 +1,9 @@
 const mCartService = require("../service/users");
 
 const verifyUser = async (req, res, next) => {
-  let username = req.cookies.userName;
-  let password = req.cookies.password;
   try {
+    let username = req.cookies.userName;
+    let password = req.cookies.password;
     let successResponse = await mCartService.login(username, password);
     if (successResponse) next();
   } catch (err) {

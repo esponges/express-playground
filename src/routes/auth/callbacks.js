@@ -1,3 +1,5 @@
+const mCartService = require("../../service/users");
+
 const login = async (req, res, next) => {
   try {
     let username = req.body.userName;
@@ -11,6 +13,7 @@ const login = async (req, res, next) => {
   }
 };
 
+
 const register = async (req, res, next) => {
   try {
     let userData = req.body;
@@ -21,10 +24,21 @@ const register = async (req, res, next) => {
   }
 };
 
-const logout = (req, res, next) => {
-  res.clearCookie('userName');
-  res.clearCookie('password');
-  res.json({ message: 'User Logged out successfully' });
+// const logout = (req, res, next) => {
+//   res.clearCookie('userName');
+//   res.clearCookie('password');
+//   res.json({ message: 'User Logged out successfully' });
+// };
+
+const logout = async (req, res, next) => {
+  try {
+    req.session.destroy(() => {
+      res.clearCookie('connect.sid');
+      res.json({ message: 'User Logged out successfully' });
+    });
+  } catch (err) {
+    next(err);
+  }
 };
 
 module.exports = {
