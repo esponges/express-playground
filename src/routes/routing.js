@@ -5,7 +5,7 @@ const setupdb = require('../model/setupdb');
 const mCartService = require('../service/users');
 const { verifyUser } = require('../middlewares/user');
 const { getAll, getById } = require('./products/callbacks');
-const { setSession, getSession, updateSession, endSession } = require('./session/callbacks');
+const { setSession, getSession, updateSession, endSession, refreshSession } = require('./session/callbacks');
 const { login, register, logout } = require('./auth/callbacks');
 
 router.get('/setupdb', async (req, res, next) => {
@@ -31,6 +31,7 @@ router.post('/session', setSession);
 router.get('/session', getSession);
 router.put('/session', updateSession);
 router.delete('/session', endSession);
+router.post('/refresh-session', refreshSession);
 
 router.all('*', (req, res, next) => {
   res.json({ message: 'Invalid Request' });

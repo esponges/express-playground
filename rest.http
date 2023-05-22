@@ -45,3 +45,6 @@ PUT http://localhost:3000/session
 ###
 
 DELETE http://localhost:3000/session
+
+###
+POST http://localhost:3000/refresh-session

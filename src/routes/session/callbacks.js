@@ -1,6 +1,6 @@
 const setSession = (req, res, next) => {
   req.session.user = { username: 'John Doe', password: 'Foobar' };
-  res.send('Session Set');
+  res.send('Session Set in the DB');
 };
 
 const getSession = (req, res, next) => {
@@ -19,9 +19,21 @@ const endSession = (req, res, next) => {
   });
 };
 
+const refreshSession = (req, res, next) => {
+  req.session.regenerate((err) => {
+    if (err) {
+      res.json({ message: 'Session could not be refreshed' });
+    } else {
+      req.session.username = 'Foowie boo';
+      res.json({ message: 'Session refreshed' });
+    }
+  });
+};
+
 module.exports = {
   setSession,
   getSession,
   updateSession,
   endSession,
+  refreshSession,
 };
