@@ -1,31 +1,12 @@
 const express = require('express');
 const app = express();
 const router = require('./routes/routing');
-const errorLogger = require('./utilities/errorLogger');
-const requestLogger = require('./utilities/requestLogger');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-const MongoStore = require('connect-mongo');
-const mongoose = require('mongoose');
+/* Import the required modules here */
 
-mongoose.connect(process.env.DB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
+/* Configure the required middleware functions in proper order */
 
-const combinedRouter = express.Router();
-combinedRouter.use('/', router);
-
-app.use(bodyParser.json());
-app.use(cookieParser());
-app.use(requestLogger);
-app.use(session({ 
-    secret: 'someSecret',
-    resave: true,
-    saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: process.env.DB_URL })
- }));
-app.use('/', combinedRouter);
-app.use(errorLogger);
+app.use('/', router);
 
 app.listen(3000, () => {
-    console.log("server running in port 3000");
+    console.log("server listening in port 3000");
 })
