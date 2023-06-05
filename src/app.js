@@ -1,12 +1,15 @@
 const express = require('express');
 const app = express();
-const router = require('./routes/routing');
-/* Import the required modules here */
+const port = 4500;
+const path = require('path');
+const bodyParser = require('body-parser');
 
-/* Configure the required middleware functions in proper order */
 
-app.use('/', router);
 
-app.listen(3000, () => {
-    console.log("server listening in port 3000");
+app.use(bodyParser.json());
+
+
+app.listen(port, () => {
+    console.log(`Server up and running at ${port}`)
 })
+
